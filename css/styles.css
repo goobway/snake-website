@@ -1,0 +1,64 @@
+#home {
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-color: lightblue;
+  background-position: center;
+  margin: 03;
+}
+
+.game {
+  margin: auto;
+  width: 50%;
+  border: 3px solid;
+  padding: 10px;
+  text-align: center
+}
+
+button {
+  background-color: green;
+  color: white;
+  border: none;
+  bottom: 0;
+  height: 30px;
+  font-size: 12pt;
+  float: center;
+  width: 90px;
+  margin: 10px 0 0 0;
+  align-content: center;
+}
+
+h1 {
+    text-align: center;
+    color: green;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30pt;
+  }
+
+h2 {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    font-family: Helvetica;
+    font-weight: bold;
+    width: 250px;
+    margin: 18px 0 5px 8px;
+    float: left;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%; 
+  }
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+tr nth-child even {
+  background-color: #dddddd;
+}
