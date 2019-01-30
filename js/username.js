@@ -1,4 +1,5 @@
-function showInput() {
-    document.getElementById('display').innerHTML =
-                document.getElementById("user_input").value;
-}
+var inputElement = document.getElementById('user_input');
+var theirInput = '';
+    inputElement.addEventListener('change', function(e) {
+        theirInput = e.target.value;
+    });
