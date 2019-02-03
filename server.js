@@ -4,6 +4,10 @@ const server = express();
 
 server.use(express.static("static"));
 
+server.get('/', (request, response) => {
+    response.sendFile(path.join(__dirname, './static/homepage.html'));
+});
+
 // /play?user=Calista
 server.get('/play', (request, response) => {
     let user = request.query.user;

@@ -1,5 +1,8 @@
-var inputElement = document.getElementById('user_input');
-var theirInput = '';
-    inputElement.addEventListener('change', function(e) {
-        theirInput = e.target.value;
+(function (window, document) {
+
+    document.getElementById("submit_btn").addEventListener("click", () => {
+        let username = document.getElementById("user_input").value
+        window.location = "/play?user=" + username; 
     });
+
+})(window, document);
