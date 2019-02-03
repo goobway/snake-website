@@ -1,5 +1,9 @@
 (function (window, document, drawModule, undefined) {
 
+    // let urlString = window.location.href;
+    // let url = new URL(urlString); 
+    // let username = url.searchParams.get("user");
+
     var btn = document.getElementById('btn');
     btn.addEventListener("click", function(){ drawModule.init();});
     
