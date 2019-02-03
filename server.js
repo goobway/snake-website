@@ -15,6 +15,20 @@ server.get('/play', (request, response) => {
     response.sendFile(path.join(__dirname, './static/play.html'));
 });
 
+// 1. user finishes snake game
+// 2. POST request is sent through this server with the score and username
+// /score?u=calista&s=10 (score will be in URL parameters OR body)
+// 3. Sever gets
+// server.post("/score", ...)
+// You've acheived this point when you can print a username and a score
+// 4. Add the username and score PAIR to a database
+// Easiest database to start with is MongoDB
+
+// A database is a big excel sheet
+// col | username | score
+// 0   | calista  | 10,000
+// 1   | jacob    | 100
+
 server.listen(3000, () => {
     console.log("Listening on http://localhost:3000/")
 });
