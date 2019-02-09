@@ -15,6 +15,13 @@ server.get('/play', (request, response) => {
     response.sendFile(path.join(__dirname, './static/play.html'));
 });
 
+//this probably doesnt work
+server.get('/play', (request, response) => {
+     let user = request.score.user;
+     console.log(user + score);
+     response.sendFile(path.join(__dirname, '.static/homepage.html'));
+ });
+
 // 1. user finishes snake game
 // 2. POST request is sent through this server with the score and username
 // /score?u=calista&s=10 (score will be in URL parameters OR body)
