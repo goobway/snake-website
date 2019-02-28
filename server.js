@@ -1,6 +1,14 @@
 const express = require("express");
 const path = require("path");
 const server = express();
+const mongoose = require('mongoose');
+
+// Connecting to MongoDB
+mongoose.connect('mongodb://mongo:27017/docker-node-mongo',
+        { userNewURLParser: true }
+    )
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 server.use(express.static("static"));
 

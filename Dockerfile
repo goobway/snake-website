@@ -17,3 +17,5 @@ EXPOSE 3000
 
 # Run the server
 CMD npm start
+
+# Question: why not CDM ["npm", "start"]?
