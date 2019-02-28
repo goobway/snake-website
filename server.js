@@ -4,8 +4,8 @@ const server = express();
 const mongoose = require('mongoose');
 
 // Connecting to MongoDB
-mongoose.connect('mongodb://mongo:27017/docker-node-mongo',
-        { userNewURLParser: true }
+mongoose.connect('mongodb://mongo:27017/snakegame',
+        { useNewURLParser: true }
     )
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));

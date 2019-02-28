@@ -3,8 +3,9 @@ services:
 
   # NodeJS Server
   nodejs:
-    # container_name: docker-node-mongo
     build: .
+    depends_on: 
+      - mongo
     restart: always
     environment:
       - PORT=3000
@@ -15,12 +16,16 @@ services:
     networks:
       - snakenet 
 
-# Mongo Container
+  # Mongo Container
   mongo:
-    container_name: mongo
-    image: mongo
+    image: mongo:3.4.19
     ports:
       - 27017:27017
+    volumes:
+      - ./.db:/data/db
+    restart: always
+    networks:
+      - snakenet
 
 networks:
   snakenet:
