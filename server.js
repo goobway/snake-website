@@ -3,11 +3,35 @@ const path = require("path");
 const server = express();
 const mongoose = require('mongoose');
 
+let db = null;
+let scoreSchema = mongoose.Schema({
+    _id: String,
+    value: Number
+});
+
+// Create mongoose schema
+let Score = mongoose.model('Score', scoreSchema);
+
 // Connecting to MongoDB
 mongoose.connect('mongodb://mongo:27017/snakegame',
         { useNewURLParser: true }
     )
-    .then(() => console.log('MongoDB Connected'))
+    .then((database) => {
+        console.log('MongoDB Connected');
+
+        db = database;
+
+        let testscore = new Score({
+            _id: "Calista",
+            value: 100
+        });
+
+        testscore.save((err => {
+            if (err) throw err;
+
+            console.log("Score Saved!");
+        }));
+    })
     .catch(err => console.log(err));
 
 server.use(express.static("static"));
