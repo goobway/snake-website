@@ -36,23 +36,23 @@ mongoose.connect('mongodb://mongo:27017/snakegame',
 
 server.use(express.static("static"));
 
-server.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname, './static/homepage.html'));
+server.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './static/homepage.html'));
 });
 
 // /play?user=Calista
-server.get('/play', (request, response) => {
-    let user = request.query.user;
+server.get('/play', (req, res) => {
+    let user = req.query.user;
     console.log(user);
-    response.sendFile(path.join(__dirname, './static/play.html'));
+    res.sendFile(path.join(__dirname, './static/play.html'));
 });
 
 // /play?user=calista&score=20
-server.post('/play', (request, response) => {
-    let user = request.query.user;
-    let score = request.query.score;
+server.post('/play', (req, res) => {
+    let user = req.query.user;
+    let score = req.query.score;
     console.log(user + ": " + score);
-    response.sendFile(path.join(__dirname, './static/play.html'));
+    res.sendFile(path.join(__dirname, './static/play.html'));
 });
 
 // 1. user finishes snake game
