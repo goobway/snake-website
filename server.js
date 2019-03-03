@@ -21,22 +21,8 @@ mongoose.connect('mongodb://mongo:27017/snakegame',
 
         db = database;
 
-        let testScore = new Score({
-            _id: "Calista",
-            value: 100
-        });
-
-        Score.findOneAndUpdate(
-            { '_id': 'Calista' },
-            testScore,
-            { upsert: true },
-            (err) => {
-                if (err) throw err;
-
-                console.log("Score Saved!");
-            });
     })
-    .catch (err => console.log(err));
+    .catch(err => console.log(err));
 
 server.use(express.static("static"));
 
@@ -53,10 +39,33 @@ server.get('/play', (request, response) => {
 
 // /play?user=calista&score=20
 server.post('/play', (request, response) => {
+
+    // Grab username and score from POST request (provided after user wins game)
     let user = request.query.user;
     let score = request.query.score;
-    console.log(user + ": " + score);
-    response.sendFile(path.join(__dirname, './static/play.html'));
+
+    // Instantiate a new Score objects to save to mongodb (Score was defined above)
+    let scoreDoc = new Score({
+        _id: user,
+        value: score
+    });
+
+    // Save the score to mongodb (find if any exist and update or create if does not exist already)
+    Score.findOneAndUpdate(
+        // Search on primary key "_id", this is the unique identifier for the data, here we use "user"
+        { '_id': user },
+        // Pass in the score object we just created as the data to upsert with
+        scoreDoc,
+        // Upsert is short-hand update or insert (update if exists, insert if not)
+        { upsert: true },
+        (err) => {
+            if (err) throw err;
+            // This callback will run after we've upserted the data into mongodb
+            // Once we've done this, send a response back to the user
+            console.log("Score Saved!");
+            console.log(user + ": " + score);
+            response.sendFile(path.join(__dirname, './static/play.html'));
+        });
 });
 
 // 1. user finishes snake game
