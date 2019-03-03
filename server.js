@@ -14,25 +14,29 @@ let Score = mongoose.model('Score', scoreSchema);
 
 // Connecting to MongoDB
 mongoose.connect('mongodb://mongo:27017/snakegame',
-        { useNewURLParser: true }
-    )
+    { useNewURLParser: true }
+)
     .then((database) => {
         console.log('MongoDB Connected');
 
         db = database;
 
-        let testscore = new Score({
+        let testScore = new Score({
             _id: "Calista",
             value: 100
         });
 
-        testscore.save((err => {
-            if (err) throw err;
+        Score.findOneAndUpdate(
+            { '_id': 'Calista' },
+            testScore,
+            { upsert: true },
+            (err) => {
+                if (err) throw err;
 
-            console.log("Score Saved!");
-        }));
+                console.log("Score Saved!");
+            });
     })
-    .catch(err => console.log(err));
+    .catch (err => console.log(err));
 
 server.use(express.static("static"));
 
