@@ -37,35 +37,55 @@ server.get('/play', (request, response) => {
     response.sendFile(path.join(__dirname, './static/play.html'));
 });
 
-// /play?user=calista&score=20
-server.post('/play', (request, response) => {
+// /score?user=calista&score=20
+server.post('/score', (request, response) => {
 
     // Grab username and score from POST request (provided after user wins game)
     let user = request.query.user;
     let score = request.query.score;
 
-    // Instantiate a new Score objects to save to mongodb (Score was defined above)
-    let scoreDoc = new Score({
-        _id: user,
-        value: score
-    });
+    // Check if the new score is less than the current score
+    Score.findOne({ '_id': user }, (err, result) => {
+        if (err) throw err;
 
-    // Save the score to mongodb (find if any exist and update or create if does not exist already)
-    Score.findOneAndUpdate(
-        // Search on primary key "_id", this is the unique identifier for the data, here we use "user"
-        { '_id': user },
-        // Pass in the score object we just created as the data to upsert with
-        scoreDoc,
-        // Upsert is short-hand update or insert (update if exists, insert if not)
-        { upsert: true },
-        (err) => {
-            if (err) throw err;
-            // This callback will run after we've upserted the data into mongodb
-            // Once we've done this, send a response back to the user
-            console.log("Score Saved!");
-            console.log(user + ": " + score);
-            response.sendFile(path.join(__dirname, './static/play.html'));
+        // Check if user exsits
+        if (result && result.value > score) {
+            console.log(result);
+            response.sendStatus(200);
+            return;
+        }
+        // Instantiate a new Score objects to save to mongodb (Score was defined above)
+        let scoreDoc = new Score({
+            _id: user,
+            value: score
         });
+
+        // Save the score to mongodb (find if any exist and update or create if does not exist already)
+        Score.findOneAndUpdate(
+            // Search on primary key "_id", this is the unique identifier for the data, here we use "user"
+            { '_id': user },
+            // Pass in the score object we just created as the data to upsert with
+            scoreDoc,
+            // Upsert is short-hand update or insert (update if exists, insert if not)
+            { upsert: true },
+            (err) => {
+                if (err) throw err;
+                // This callback will run after we've upserted the data into mongodb
+                // Once we've done this, send a response back to the user
+                console.log("Score Saved!");
+                console.log(user + ": " + score);
+                response.sendStatus(201);
+            });
+    });
+});
+
+server.get('/scores', (reqest, response) => {
+    // Get the top 10 scores from mongodb
+    Score.find().sort([['value', 'descending']]).limit(10).exec((err, scores) => {
+        if (err) throw err;
+        console.log(scores);
+        response.json(scores);
+    });
 });
 
 // 1. user finishes snake game
