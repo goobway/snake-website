@@ -1,7 +1,32 @@
 .center {
     margin: auto;
     width: 60%;
-    border: 3px solid #047dff;
+    border: 6px solid #032a55;
     padding: 10px;
     text-align: center;
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15pt;
+}
+
+#submit_btn {
+    background-color: #032a55;
+    color: white;
+    border: none;
+    bottom: 0;
+    height: 30px;
+    font-size: 12pt;
+    float: center;
+    width: 90px;
+    margin: 10px 0 0 0;
+    align-content: center;
+}
+
+#user_input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    height: 20px;
+    width: 225px;
 }
