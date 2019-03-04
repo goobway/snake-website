@@ -47,7 +47,8 @@ var drawModule = (function () {
     }
     else if (direction == 'up') {
       snakeY--;
-    } else if (direction == 'down') {
+    } 
+    else if (direction == 'down') {
       snakeY++;
     }
 
