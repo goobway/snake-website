@@ -2,18 +2,19 @@ const express = require("express");
 const path = require("path");
 const server = express();
 const mongoose = require("mongoose");
-const expressSanitizer = require("express-sanitizer");
 
-app.use(express.json());
-// mounting express-sanitizer middleware
-app.use(expressSanitizer());
+// const expressSanitizer = require("express-sanitizer");
 
-app.post('/', function(reqest, response, next){
-    // replace an http posted body property with the sanitized string
-    const sanitizedString = reqest.sanitize(reqest.body.propertyToSanitize);
-    // send the respose
-    response.send({ sanitized: sanitizedString });
-});
+// app.use(express.json());
+// // mounting express-sanitizer middleware
+// app.use(expressSanitizer());
+
+// app.post('/', function(reqest, response, next){
+//     // replace an http posted body property with the sanitized string
+//     const sanitizedString = reqest.sanitize(reqest.body.propertyToSanitize);
+//     // send the respose
+//     response.send({ sanitized: sanitizedString });
+// });
 
 let db = null;
 let scoreSchema = mongoose.Schema({
