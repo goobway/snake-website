@@ -18,6 +18,7 @@
   "homepage": "https://github.com/goobway/SnakeWebsite#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "express-sanitizer": "^1.0.5",
     "mongoose": "^5.4.16"
   }
 }
