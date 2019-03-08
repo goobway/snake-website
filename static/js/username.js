@@ -6,3 +6,8 @@
     });
 
 })(window, document);
+
+function letterNumberOnly(input) {
+    var regex = /[^a-zA-Z0-9_]/gi;
+    input.value = input.value.replace(regex, "");
+}
