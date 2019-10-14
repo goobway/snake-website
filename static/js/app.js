@@ -8,56 +8,19 @@
     keyCode = window.event.keyCode;
     keyCode = event.keyCode;
 
-    switch (keyCode) {
-
-      // LEFT
-      case 37:
-        if (direction != 'right') {
-          direction = 'left';
-        }
-        break;
-      case 65: //a
-        if (direction != 'right') {
-          direction = 'left';
-        }
-        break;
-
-      // RIGHT
-      case 39:
-        if (direction != 'left') {
-          direction = 'right';
-        }
-        break;
-      case 68: //d
-        if (direction != 'left') {
-          direction = 'right';
-        }
-        break;
-
-      // UP
-      case 38:
-        if (direction != 'down') {
-          direction = 'up';
-        }
-        break;
-      case 87: //w
-        if (direction != 'down') {
-          direction = 'up';
-        }
-        break;
-
-      // DOWN
-      case 40:
-        if (direction != 'up') {
-          direction = 'down';
-        }
-        break;
-      case 83: //s
-        if (direction != 'up') {
-          direction = 'down';
-        }
-        break;
+    var keyMaps = {
+      37: 'left',
+      65: 'left',
+      39: 'right',
+      68: 'right',
+      38: 'up',
+      87: 'up',
+      40: 'right',
+      83: 'right',      
     }
+
+    if (keyMaps[keyCode] !== undefined) direction = keyMaps[keyCode]
+
   }
 
   // Request scores from server (server will get scores from mongodb)
